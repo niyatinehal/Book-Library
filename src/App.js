@@ -18,6 +18,7 @@ import { useContext, useState } from "react";
 import { authContext } from "./context/authContext";
 import { LoginPage } from "./component/LoginPage";
 import { Signup } from "./component/Signup";
+import { ProductDetail } from "./component/ProductDetail";
 
 function App() {
   const { authState} = useContext(authContext);
@@ -34,8 +35,8 @@ function App() {
       </nav>
       <Routes>
         <Route path="/mockman" element={<Mockman />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/product" element={<Product />} />
+        <Route path="/" element={<Auth isLoggedIn={authState.isLoggedIn}><Home /></Auth>} />
+        <Route path="/product" element={<Auth isLoggedIn={authState.isLoggedIn}><Product /></Auth>} />
         <Route
           path="/wishlist"
           element={
@@ -63,6 +64,7 @@ function App() {
           }
         />
         <Route path="/signup" element={<Signup/>}/>
+        <Route path="/product/:_id" element={<ProductDetail/>}/>
       </Routes>
     </div>
   );

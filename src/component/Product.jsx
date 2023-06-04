@@ -2,16 +2,22 @@ import React, { useContext, useEffect, useState, useReducer } from "react";
 import { productContext } from "../context/productContext";
 import { useProduct } from "../context/productContext";
 import { authContext } from "../context/authContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { filterContext } from "../context/filterContext";
 import { products } from "../backend/db/products";
+import { toast } from "react-toastify";
 
 export const Product = () => {
   const { filterState, filterDispatch, mysteryBooks } =
     useContext(filterContext);
   //const{authState}=useContext(authContext);
-  const { handleCart, productData, productDispatch, isClicked,handleWishlist } =
-    useContext(productContext);
+  const {
+    handleCart,
+    productData,
+    productDispatch,
+    isClicked,
+    handleWishlist,
+  } = useContext(productContext);
 
   const navigate = useNavigate();
 
@@ -32,13 +38,17 @@ export const Product = () => {
   const fantasyHandler = () => {
     filterDispatch({ type: "includeFantasy" });
   };
+  const resetHandler = () => {
+    filterDispatch({ type: "clearFilter" });
+  };
 
   const isItemInCart = (data, id) => {
     return data.find((item) => item._id === id) ? true : false;
   };
-  const isItemInWishlist=(data,id)=>{
+  const isItemInWishlist = (data, id) => {
     return data?.find((item) => item._id === id) ? true : false;
-  }
+  };
+
   return (
     <div>
       <div>
@@ -97,42 +107,52 @@ export const Product = () => {
           onChange={mysteryHandler}
         />
         <lable htmlFor="mystery">Mystery</lable>
+        <button onClick={resetHandler}>Reset Filter</button>
       </div>
 
-      <h3>Products</h3>
+      <h3>Products ({mysteryBooks?.length})</h3>
       {mysteryBooks ? (
         <div>
-          {mysteryBooks.map((book) => (
-            <li key={book._id}>
-              <h1>{book.title}</h1>
-              <h3>{book.author}</h3>
-              <h3>{book.price}</h3>
-              <h4>{book.categoryName}</h4>
-              <button
-                onClick={() => {
-                  if(isItemInCart(productData.cart,book._id)){
-                    navigate("/cart")
-                  }else{
-                    handleCart(book);
-                  }
-                  
-                }}
-              >
-                {isItemInCart(productData.cart, book._id)
-                  ? "Go To Cart"
-                  : "Add To Cart"}
-              </button>
-              <button onClick={()=>{
-                if(isItemInWishlist(productData.wishlist,book._id)){
-                  navigate("/wishlist")
-                }else{
-                handleWishlist(book)
-                }
-              }}>{isItemInWishlist(productData.wishlist, book._id)
-                  ? "Go To Wishlist"
-                  : "Add To Wishlist"}</button>
-            </li>
-          ))}
+          {mysteryBooks?.length > 0
+            ? mysteryBooks.map((book) => (
+                <li key={book._id}>
+                  <h1>
+                    <Link to={`/product/${book._id}`}>{book.title}</Link>
+                  </h1>
+                  <h3>{book.author}</h3>
+
+                  <button
+                    onClick={() => {
+                      if (isItemInCart(productData.cart, book._id)) {
+                        navigate("/cart");
+                      } else {
+                        handleCart(book);
+                        toast.success("Item is added to Cart!", {
+                          position: "top-right",
+                        });
+                      }
+                    }}
+                  >
+                    {isItemInCart(productData.cart, book._id)
+                      ? "Go To Cart"
+                      : "Add To Cart"}
+                  </button>
+                  <button
+                    onClick={() => {
+                      if (isItemInWishlist(productData.wishlist, book._id)) {
+                        navigate("/wishlist");
+                      } else {
+                        handleWishlist(book);
+                      }
+                    }}
+                  >
+                    {isItemInWishlist(productData.wishlist, book._id)
+                      ? "Go To Wishlist"
+                      : "Add To Wishlist"}
+                  </button>
+                </li>
+              ))
+            : "A book Can have only one genere"}
         </div>
       ) : (
         <h3>...isLoading</h3>

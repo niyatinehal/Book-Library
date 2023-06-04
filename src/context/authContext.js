@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useReducer } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const authContext = createContext();
 
@@ -22,13 +23,13 @@ export const AuthProvider = ({ children }) => {
         authDispatch({ type: "loggedInTrue", payload: true });
         authDispatch({ type: "setUser", payload: data?.foundUser });
         authDispatch({ type: "setToken", payload: data?.encodedToken });
-        alert("loginSuccessfull");
+        toast.success("loginSuccessfull");
          navigate(location?.state?.from?.pathname)
       }
     } catch (error) {
       authDispatch({ type: "loggedInFalse", payload: false });
       console.log(error);
-      alert(error.response.data.errors);
+      toast.error(error.response?.data.errors);
     }
   };
 //   console.log(location)

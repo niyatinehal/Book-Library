@@ -1,14 +1,15 @@
-import React, { createContext, useEffect } from 'react';
-import { useReducer } from 'react';
-import { useContext } from 'react';
-import { productContext } from './productContext';
-import { products } from '../backend/db/products';
+import React, { createContext, useEffect } from "react";
+import { useReducer } from "react";
+import { useContext } from "react";
+import { productContext } from "./productContext";
+import { products } from "../backend/db/products";
 
-export const filterContext=createContext([])
-export const FilterProvider= ({children}) => {
-const { productData,productDispatch,getProductData} = useContext(productContext);
+export const filterContext = createContext([]);
+export const FilterProvider = ({ children }) => {
+  const { productData, productDispatch, getProductData } =
+    useContext(productContext);
 
-const filterReducer = (prod, action) => {
+  const filterReducer = (prod, action) => {
     switch (action.type) {
       case "search-filter":
         return {
@@ -35,14 +36,22 @@ const filterReducer = (prod, action) => {
           ...prod,
           isFantasy: !prod.isFantasy,
         };
+      case "clearFilter":
+        return {
+          prodDetails: productData.filterProduct,
+          searchQuery: "",
+          sortby: null,
+          isFiction: false,
+          isFantasy: false,
+          isMystery: false,
+        };
       default:
         return prod;
     }
   };
-  
 
-const [filterState, filterDispatch] = useReducer(filterReducer, {
-    prodDetails:productData.filterProduct,
+  const [filterState, filterDispatch] = useReducer(filterReducer, {
+    prodDetails: productData.filterProduct,
     searchQuery: "",
     sortby: null,
     isFiction: false,
@@ -50,7 +59,7 @@ const [filterState, filterDispatch] = useReducer(filterReducer, {
     isMystery: false,
   });
 
-      const searchedBooks =
+  const searchedBooks =
     filterState.searchQuery?.length > 0
       ? filterState?.prodDetails?.filter((item) =>
           item.title.toLowerCase().includes(filterState.searchQuery)
@@ -64,19 +73,25 @@ const [filterState, filterDispatch] = useReducer(filterReducer, {
           : b.price - a.price
       )
     : searchedBooks;
-  const fictionalBooks=filterState.isFiction ? sortedBooks.filter((book)=>book.categoryName==="Fiction"): sortedBooks;
+  const fictionalBooks = filterState.isFiction
+    ? sortedBooks.filter((book) => book.categoryName === "Fiction")
+    : sortedBooks;
 
-  const fantasyBooks=filterState.isFantasy? fictionalBooks.filter((book)=>book.categoryName==="Fantasy"): fictionalBooks;
-  
-  const mysteryBooks=filterState.isMystery? fantasyBooks.filter((book)=>book.categoryName==="Mystery"): fantasyBooks;
+  const fantasyBooks = filterState.isFantasy
+    ? fictionalBooks.filter((book) => book.categoryName === "Fantasy")
+    : fictionalBooks;
 
+  const mysteryBooks = filterState.isMystery
+    ? fantasyBooks.filter((book) => book.categoryName === "Mystery")
+    : fantasyBooks;
 
-  
   return (
-    <filterContext.Provider value={{filterState,filterDispatch,mysteryBooks}}> 
-        {children}
+    <filterContext.Provider
+      value={{ filterState, filterDispatch, mysteryBooks }}
+    >
+      {children}
     </filterContext.Provider>
-  )
-}
+  );
+};
 
-export const useFilter=()=>useContext(filterContext);
+export const useFilter = () => useContext(filterContext);

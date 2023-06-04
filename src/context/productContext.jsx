@@ -5,6 +5,8 @@ import {
   useReducer,
   useState,
 } from "react";
+import { toast } from "react-toastify";
+
 import { authContext } from "../context/authContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +21,7 @@ const defaultAddress = [
     houseNumber: "A-123, XYZ",
     city: "singrauli",
     state: "Madhya Pradesh",
+    country: "India",
     pincode: "123456",
     mobileNumber: "123456789",
   },
@@ -68,6 +71,42 @@ export const ProductProvider = ({ children }) => {
           ...state,
           address: state?.address.filter(({ id }) => id !== action.payload),
         };
+      case "editAddress":
+        return {
+          ...state,
+          address: state?.address?.map((addressItem) =>
+            addressItem.id === action.payload
+              ? { ...addressItem, isEdit: true }
+              : addressItem
+          ),
+        };
+      case "saveAddress":
+        return {
+          ...state,
+          address: state.address.map((addressItem) =>
+            addressItem.id === action.payload[1]
+              ? { ...action.payload[0] }
+              : addressItem
+          ),
+        };
+      case "cancelAddress":
+        return {
+          ...state,
+          address: state.address.map((addressItem) =>
+            addressItem.id === action.payload
+              ? { ...addressItem, isEdit: false }
+              : addressItem
+          ),
+        };
+      case "deleteAddress":
+        return {
+          ...state,
+          address: state?.address?.map(
+            (addressItem) => addressItem.id !== action.payload
+          ),
+        };
+      default:
+        return state;
     }
   };
   const [productData, productDispatch] = useReducer(productReducer, {
@@ -128,7 +167,7 @@ export const ProductProvider = ({ children }) => {
       if (response.status === 200) {
         return response;
       }
-      console.log("wishList working")
+      console.log("wishList working");
     } catch (error) {
       console.log(error);
     }
@@ -140,13 +179,13 @@ export const ProductProvider = ({ children }) => {
       const wishlistRes = await getWishlist(encodedToken);
       if (cartRes.response === 200) {
         productDispatch({ type: "setCart", payload: cartRes?.data?.cart });
-      }     
-      
+      }
+
       if (wishlistRes.response === 200) {
         productDispatch({
           type: "setWishlist",
           payload: wishlistRes?.data?.cart,
-        });       
+        });
       }
     } catch (error) {
       console.log(error);
@@ -165,12 +204,12 @@ export const ProductProvider = ({ children }) => {
             },
           }
         );
-        
+
         if (status === 201) {
           productDispatch({ type: "setCart", payload: data?.cart });
           setIsClicked(true);
+          toast.success("Item is added to Cart!");
         }
-        console.log("cart2", productData.cart);
       } else {
         navigate("/LoginPage");
       }
@@ -220,14 +259,16 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
-
-    const deleteWishlistItem = async (bookID) => {
+  const deleteWishlistItem = async (bookID) => {
     try {
-      const { status, data } = await axios.delete(`api/user/wishlist/${bookID}`, {
-        headers: {
-          authorization: encodedToken,
-        },
-      });
+      const { status, data } = await axios.delete(
+        `api/user/wishlist/${bookID}`,
+        {
+          headers: {
+            authorization: encodedToken,
+          },
+        }
+      );
       if (status === 200) {
         productDispatch({ type: "setWishlist", payload: data?.wishlist });
         console.log("wishlist: ", productData.wishlist, status, bookID);
@@ -237,25 +278,29 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
-  const handleWishlist= async(prodData)=>{
+  const handleWishlist = async (prodData) => {
     try {
-        if(authState.isLoggedIn){
-            const{status,data}=await axios.post("/api/user/wishlist",{product:prodData},{
+      if (authState.isLoggedIn) {
+        const { status, data } = await axios.post(
+          "/api/user/wishlist",
+          { product: prodData },
+          {
             headers: {
               authorization: encodedToken,
             },
-          });
-          if(status===201){
-            productDispatch({type:"setWishlist",payload:data.wishlist});             
           }
-          console.log("wishlist",productData.wishlist)
-        }else{
-            navigate("/LoginPage")
+        );
+        if (status === 201) {
+          productDispatch({ type: "setWishlist", payload: data.wishlist });
         }
+        console.log("wishlist", productData.wishlist);
+      } else {
+        navigate("/LoginPage");
+      }
     } catch (error) {
-    console.log(error.message)
+      console.log(error.message);
     }
-  }
+  };
 
   useEffect(() => {
     getProductData();
@@ -276,7 +321,7 @@ export const ProductProvider = ({ children }) => {
         isClicked,
         deleteCartItem,
         handleWishlist,
-        deleteWishlistItem
+        deleteWishlistItem,
       }}
     >
       {children}

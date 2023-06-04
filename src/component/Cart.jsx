@@ -1,12 +1,18 @@
 import React, { useContext } from "react";
 import { productContext } from "../context/productContext";
+import { useNavigate } from "react-router-dom";
 
 export const Cart = ({ product }) => {
-  const { productData, handleCartQty,deleteCartItem } = useContext(productContext);
+  const navigate = useNavigate();
+  const { productData, handleCartQty, deleteCartItem } =
+    useContext(productContext);
   return (
     <div>
       {productData?.cart.length === 0 ? (
-        <p>Empty </p>
+        <div>
+          <p>Empty </p>
+          <button onClick={() => navigate("/")}>Go To Home Page</button>
+        </div>
       ) : (
         <div>
           <h1>cart ({productData?.cart.length})</h1>
@@ -17,18 +23,21 @@ export const Cart = ({ product }) => {
                   <h3>{prod.title}</h3>
                   <button
                     onClick={() => {
-                      if(prod.qty >1 ) {handleCartQty(prod._id, "decrement")}else{deleteCartItem(prod._id)};
+                      if (prod.qty > 1) {
+                        handleCartQty(prod._id, "decrement");
+                      } else {
+                        deleteCartItem(prod._id);
+                      }
                     }}
                   >
                     {" "}
-                    - {" "}
-                  </button> {" "}
+                    -{" "}
+                  </button>{" "}
                   {prod.qty}
                   <button onClick={() => handleCartQty(prod._id, "increment")}>
                     {" "}
                     +{" "}
                   </button>
-                  <button>Add To Wishlist</button>
                 </li>
               ))}
           </div>
