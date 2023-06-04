@@ -1,41 +1,69 @@
 import "./App.css";
-import logo from "./logo.png";
+import Mockman from "mockman-js";
+import {
+  NavLink,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+
+import { Home } from "./component/Home";
+import { Product } from "./component/Product";
+import { WishList } from "./component/WishList";
+import { Cart } from "./component/Cart";
+import { UserProfile } from "./component/UserProfile";
+import { Auth } from "./component/Auth";
+import { useContext, useState } from "react";
+import { authContext } from "./context/authContext";
+import { LoginPage } from "./component/LoginPage";
+import { Signup } from "./component/Signup";
 
 function App() {
+  const { authState} = useContext(authContext);
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} alt="mockBee logo" width="180" height="180" />
-        <h1 className="brand-title">
-          Welcome to <span>mockBee!</span>
-        </h1>
-        <p className="brand-description">
-          Get started by editing <code>src/App.js</code>
-        </p>
-        <div className="links">
-          <a
-            href="https://mockbee.netlify.app/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Explore mockBee
-          </a>
-          <a
-            href="https://mockbee.netlify.app/docs/api/introduction"
-            target="_blank"
-            rel="noreferrer"
-          >
-            API Documentation
-          </a>
-          <a
-            href="https://github.com/neogcamp/mockBee"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Contribute
-          </a>
-        </div>
-      </header>
+      <h3>E-commerce website</h3>
+      <nav>
+        <NavLink to="/">Home(LOGO) </NavLink>
+        <NavLink to="/wishlist">WishList </NavLink>
+        <NavLink to="/cart">Cart </NavLink>
+        <NavLink to="/userProfile">userProfile</NavLink>
+        
+      </nav>
+      <Routes>
+        <Route path="/mockman" element={<Mockman />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/product" element={<Product />} />
+        <Route
+          path="/wishlist"
+          element={
+            <Auth isLoggedIn={authState.isLoggedIn}>
+              <WishList />
+            </Auth>
+          }
+        />
+        <Route
+          path="/userProfile"
+          element={
+            <Auth isLoggedIn={authState.isLoggedIn}>
+              <UserProfile />
+            </Auth>
+          }
+        />
+        <Route path="/loginPage" element={ <LoginPage/>}/>
+
+        <Route
+          path="/cart"
+          element={
+            <Auth  isLoggedIn={authState.isLoggedIn}>
+              <Cart />
+            </Auth>
+          }
+        />
+        <Route path="/signup" element={<Signup/>}/>
+      </Routes>
     </div>
   );
 }
