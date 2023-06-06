@@ -252,7 +252,7 @@ export const ProductProvider = ({ children }) => {
       });
       if (status === 200) {
         productDispatch({ type: "setCart", payload: data?.cart });
-        console.log("deleted: ", productData.cart, status, bookID);
+        toast.success("item deleted successfully")
       }
     } catch (error) {
       console.log(error);
@@ -271,7 +271,7 @@ export const ProductProvider = ({ children }) => {
       );
       if (status === 200) {
         productDispatch({ type: "setWishlist", payload: data?.wishlist });
-        console.log("wishlist: ", productData.wishlist, status, bookID);
+        toast.success("Item Deleted From Wishlist")
       }
     } catch (error) {
       console.log(error);
@@ -292,6 +292,7 @@ export const ProductProvider = ({ children }) => {
         );
         if (status === 201) {
           productDispatch({ type: "setWishlist", payload: data.wishlist });
+          toast.success("Item Added To Wishlist")
         }
         console.log("wishlist", productData.wishlist);
       } else {
@@ -307,7 +308,7 @@ export const ProductProvider = ({ children }) => {
     getCategoryData();
     setCartItem();
     deleteCartItem();
-    //authState?.isLoggedIn && setCartItem();
+    authState?.isLoggedIn && setCartItem();
   }, []);
   //productDispatch, authState?.isLoggedIn
   return (

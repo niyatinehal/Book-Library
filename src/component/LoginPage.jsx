@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useReducer, useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { authContext } from "../context/authContext";
 import { users } from "../backend/db/users";
-import { toast } from "react-toastify";
+import { toast,ToastContainer } from "react-toastify";
 
 export const LoginPage = () => {
   const { loggedIn, setLoggedIn, login } = useContext(authContext);
@@ -13,13 +13,14 @@ export const LoginPage = () => {
 
   const guestCreds = {
     email: "adarshbalika@gmail.com",
-    password: "adarshbalika",
+    password: "adarshbalika", 
   };
 
   const loginHandler = (e) => {
     e.preventDefault();
     if (!userData.email.trim() || !userData.password.trim()) {
       toast.error("Enter Valid Input!");
+      
     } else {
       login(userData);
       navigate(location?.state?.from?.pathname);
@@ -33,7 +34,6 @@ export const LoginPage = () => {
     //  navigate(location?.state?.from?.pathname)
   };
 
-  console.log(location.state);
   return (
     <div>
       <div>

@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 export const Product = () => {
   const { filterState, filterDispatch, mysteryBooks } =
     useContext(filterContext);
-  //const{authState}=useContext(authContext);
+  const{authState}=useContext(authContext);
   const {
     handleCart,
     productData,
@@ -19,9 +19,9 @@ export const Product = () => {
     handleWishlist,
   } = useContext(productContext);
 
-  const navigate = useNavigate();
+  console.log("authState refresh-> ",authState)
 
-  // console.log(productData.cart);
+  const navigate = useNavigate();
 
   const searchHandler = (e) => {
     filterDispatch({ type: "search-filter", payload: e.target.value });

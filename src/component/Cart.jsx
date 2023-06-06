@@ -2,6 +2,9 @@ import React, { useContext } from "react";
 import { productContext } from "../context/productContext";
 import { useNavigate } from "react-router-dom";
 
+import {CartPrice, cartPrice} from "./CartPrice"
+
+
 export const Cart = ({ product }) => {
   const navigate = useNavigate();
   const { productData, handleCartQty, deleteCartItem } =
@@ -38,9 +41,14 @@ export const Cart = ({ product }) => {
                     {" "}
                     +{" "}
                   </button>
+                  <button onClick={()=>deleteCartItem(prod._id)}> Delete </button>
                 </li>
               ))}
           </div>
+          
+          {productData.cart.length >0 && (
+            <CartPrice />
+          )}
         </div>
       )}
     </div>

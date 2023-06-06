@@ -6,7 +6,7 @@ import { authContext } from "../context/authContext";
 export const Signup = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location);
+  console.log(location)
   const { signup } = useContext(authContext);
   const [userDetails, setUserDetails] = useState({
     firstName: "",
@@ -26,10 +26,10 @@ export const Signup = () => {
     ) {
       alert("invalid input");
     } else if (userDetails?.password !== userDetails?.confirmPassword) {
-      alert("passwords should be same");
+      alert("passwords should be same"); 
     } else {
       signup(userDetails);
-      navigate("/");
+      navigate("/LoginPage");
     }
   };
   return (

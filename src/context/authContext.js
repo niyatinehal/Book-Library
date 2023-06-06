@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useReducer } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast,ToastContainer } from "react-toastify";
 
 export const authContext = createContext();
 
@@ -11,6 +11,7 @@ export const authContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [authToken, setAuthToken] = useState();
   const [loggedIn, setLoggedIn] = useState(false);
+  
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ export const AuthProvider = ({ children }) => {
       authDispatch({ type: "loggedInFalse", payload: false });
       console.log(error);
       toast.error(error.response?.data.errors);
+      
     }
   };
 //   console.log(location)
@@ -42,13 +44,15 @@ export const AuthProvider = ({ children }) => {
         authDispatch({ type: "loggedInTrue", payload: true });
         authDispatch({ type: "setUser", payload: data?.createdUser });
         authDispatch({ type: "setToken", payload: data?.encodedToken });
-        alert("signup successfull");
+        toast.succedd("signup successfull");
         navigate(location?.state?.from?.pathname); 
       }
+      console.log("signup token",data)
+     
     } catch (error) {
       authDispatch({ type: "loggedInFalse", payload: false });
       console.log(error);
-      alert(error.response.data.errors);
+      toast.error(error.response.data.errors);
     }
   };
 
@@ -59,7 +63,7 @@ export const AuthProvider = ({ children }) => {
     authDispatch({ type: "loggedInFalse", payload: false });
     authDispatch({ type: "setToken", payload: "" });
     authDispatch({ type: "setUser", payload: {} });
-    alert("you are logged out");
+    toast.warn("you are logged out");
     navigate("/");
   };
 
@@ -95,7 +99,7 @@ export const AuthProvider = ({ children }) => {
     user: {},
     token: "",
   });
-  // console.log(authState.isLoggedIn)
+
 
   return (
     <authContext.Provider

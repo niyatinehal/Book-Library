@@ -4,6 +4,7 @@ import { Header } from "../component/Header.jsx";
 import { productContext } from "../context/productContext.jsx";
 import { categories } from "../backend/db/categories.js";
 import { filterContext } from "../context/filterContext.js";
+import "../styles/home.css"
 
 export const Home = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ export const Home = () => {
     mysteryBooks,
     filterDispatch,
   } = useContext(filterContext);
-  console.log("home", filterState.isFiction);
+  
   const { productData, productDispatch } = useContext(productContext);
 
   const fictionHandler = () => {
@@ -35,8 +36,11 @@ export const Home = () => {
   console.log();
 
   return (
-    <div>
-      <div>
+    <div className="home">
+    <button className="shop-btn">
+        <Link to="/product">ShopNow</Link>
+      </button>
+      <div className="home-content">
         {productData.category?.map((category) => (
           <li key={category._id}>
             <h3>{category.categoryName}</h3>
@@ -55,9 +59,7 @@ export const Home = () => {
           </li>
         ))}
       </div>
-      <button>
-        <Link to="/product">ShopNow</Link>
-      </button>
+      
     </div>
   );
 };

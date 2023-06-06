@@ -1,0 +1,180 @@
+footer {
+  margin-top: 2rem;
+  bottom: 0;
+  background-color: #880D1E;
+}
+
+footer i {
+  color: #880D1E;
+}
+
+.newsletter {
+  height: 30vh;
+  background-color: var(--dark-purple);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding-bottom: 1rem;
+}
+
+.newsletter p {
+  text-align: center;
+}
+
+.input-container {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid lightgray;
+}
+
+.input-container input {
+  border: none;
+  padding: 0.7rem;
+}
+
+.input-container button {
+  border: none;
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+  height: 100%;
+  padding: 0 1rem;
+}
+
+.facilities {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 2rem 0;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.facilities div {
+  width: 40%;
+}
+
+.facilities div:last-child {
+  width: 100%;
+  font-size: 18px;
+}
+
+.facilities .facilities-icon {
+  border: 2px solid var(--primary-color);
+  border-radius: 50%;
+  padding: 0.5rem;
+  font-size: 20px;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.copyright {
+  background-color: var(--dark-purple);
+  color: white;
+  text-align: center;
+  font-size: 12px;
+  padding: 0.8rem;
+}
+
+.copyright div {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.copyright div a {
+  color: white;
+  text-decoration: none;
+}
+
+.shopnow-btn {
+  text-decoration: none;
+  color: white;
+}
+
+@media (min-width: 768px) {
+  .sales {
+    height: 40vh;
+  }
+  .sales-content p {
+    font-size: 28px;
+  }
+  .offer-text {
+    font-size: 18px;
+  }
+  .input-container {
+    justify-content: center;
+  }
+  .facilities div {
+    width: 10%;
+  }
+
+  .facilities div:last-child {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .facilities div:last-child div {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .copyright {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sales {
+    height: 60vh;
+  }
+  .sales-content p {
+    font-size: 32px;
+  }
+  .offer-text {
+    font-size: 22px;
+  }
+  .input-container {
+    justify-content: space-between;
+  }
+}
+
+
+
+/* footer{
+    background-color: #880D1E;
+  padding: 20px;
+  text-align: center;
+  
+}
+
+.footer-logo NavLink{
+  width: 50px; 
+  text-decoration: none;
+  color: white;
+}
+.footer-link {
+  color: #333;
+  text-decoration: none;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+
+.footer-icon {
+  width: 24px;
+  height: 24px;
+  margin: 0 5px;
+  fill: #666;
+  transition: fill 0.3s ease;
+  text-decoration: none;
+  color: white;
+} */

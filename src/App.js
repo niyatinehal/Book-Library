@@ -19,24 +19,31 @@ import { authContext } from "./context/authContext";
 import { LoginPage } from "./component/LoginPage";
 import { Signup } from "./component/Signup";
 import { ProductDetail } from "./component/ProductDetail";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Checkout } from "./component/Checkout";
+import { Footer } from "./component/Footer";
 
 function App() {
-  const { authState} = useContext(authContext);
-  
+  const { authState } = useContext(authContext);
   return (
     <div className="App">
-      <h3>E-commerce website</h3>
-      <nav>
-        <NavLink to="/">Home(LOGO) </NavLink>
-        <NavLink to="/wishlist">WishList </NavLink>
-        <NavLink to="/cart">Cart </NavLink>
-        <NavLink to="/userProfile">userProfile</NavLink>
-        
+      <nav className="navbar">
+        <div className="logo">
+          <NavLink to="/" className="navlink">Home(LOGO) </NavLink>
+        </div>
+        <div className="right-nav-content">
+          <NavLink to="/wishlist" className="navlink">WishList </NavLink>
+
+          <NavLink to="/cart" className="navlink">Cart </NavLink>
+
+          <NavLink to="/userProfile" className="navlink">userProfile</NavLink>
+        </div>
       </nav>
       <Routes>
         <Route path="/mockman" element={<Mockman />} />
-        <Route path="/" element={<Auth isLoggedIn={authState.isLoggedIn}><Home /></Auth>} />
-        <Route path="/product" element={<Auth isLoggedIn={authState.isLoggedIn}><Product /></Auth>} />
+        <Route path="/" element={<Home />} />
+        <Route path="/product" element={<Product />} />
         <Route
           path="/wishlist"
           element={
@@ -53,19 +60,29 @@ function App() {
             </Auth>
           }
         />
-        <Route path="/loginPage" element={ <LoginPage/>}/>
+        <Route path="/loginPage" element={<LoginPage />} />
 
         <Route
           path="/cart"
           element={
-            <Auth  isLoggedIn={authState.isLoggedIn}>
+            <Auth isLoggedIn={authState.isLoggedIn}>
               <Cart />
             </Auth>
           }
         />
-        <Route path="/signup" element={<Signup/>}/>
-        <Route path="/product/:_id" element={<ProductDetail/>}/>
+        <Route
+          path="/checkout"
+          element={
+            <Auth>
+              <Checkout />
+            </Auth>
+          }
+        />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/product/:_id" element={<ProductDetail />} />
       </Routes>
+      <ToastContainer />
+      <Footer/>
     </div>
   );
 }

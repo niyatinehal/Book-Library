@@ -49,3 +49,23 @@
   font-size: 1.2rem;
   margin: 1rem;
 }
+
+.navbar{
+  padding: 1rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: #880D1E;
+}
+ .navlink{
+  text-decoration: none;
+  color: white;
+}
+.right-nav-content{
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 1rem;
+  text-decoration: none;
+}
