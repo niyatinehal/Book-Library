@@ -30,14 +30,16 @@ function App() {
     <div className="App">
       <nav className="navbar">
         <div className="logo">
-          <NavLink to="/" className="navlink">Home(LOGO) </NavLink>
+          <NavLink to="/" className="navlink"><h1>BookShala</h1> </NavLink>
         </div>
         <div className="right-nav-content">
-          <NavLink to="/wishlist" className="navlink">WishList </NavLink>
+          <NavLink to="/wishlist" className="navlink"><i class="fa-solid fa-heart" ></i></NavLink>
 
-          <NavLink to="/cart" className="navlink">Cart </NavLink>
+          <NavLink to="/cart" className="navlink"><i class="fa-solid fa-cart-shopping" 
+          ></i></NavLink>
 
-          <NavLink to="/userProfile" className="navlink">userProfile</NavLink>
+          <NavLink to="/userProfile" className="navlink"><i class="fa-solid fa-user" 
+          ></i></NavLink>
         </div>
       </nav>
       <Routes>

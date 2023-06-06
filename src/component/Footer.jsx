@@ -6,20 +6,20 @@ export const Footer = () => {
   return (
     <footer>
       <div className="footer-logo">
-        <strong><NavLink to="/">Logo</NavLink></strong>
+        <strong><NavLink to="/" className="footer-logo-link"><h1>BookShala</h1></NavLink></strong>
       </div>
       <div className="facilities">
         <div>
           <p>Show some love on social media</p>
           <div className="social-links">
             <a href="https://www.instagram.com/niyati.nehal/" target="_blank">
-              <i class="fa-brands fa-instagram " style={{color: "#ffffff"}}></i>
+              <i class="fa-brands fa-instagram " ></i>
             </a>
             <a href="https://github.com/niyatinehal" target="_blank">
-              <i class="fa-brands fa-github" style={{color: "#ffffff"}} ></i>
+              <i class="fa-brands fa-github"  ></i>
             </a>
             <a href="https://twitter.com/niyati_nehal" target="_blank">
-              <i class="fa-brands fa-twitter" style={{color: "#ffffff"}}></i>
+              <i class="fa-brands fa-twitter" ></i>
             </a>
           </div>
         </div>

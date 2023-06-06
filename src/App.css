@@ -1,3 +1,15 @@
+
+:root{
+  --color0:#34373a;
+  --color1:#495867;
+  --color2:#C18C5D;
+  --color3:#CE796B;
+  --color4:#E7AD99;
+  --color5:#ECC8AF;
+  --color6:#e9d2c2;
+}
+
+
 .App {
   text-align: center;
 }
@@ -50,22 +62,42 @@
   margin: 1rem;
 }
 
+body{
+  margin: 0;
+  padding: 0;
+  background-color: var(--color6);
+  background-image: url("");
+}
+
 .navbar{
-  padding: 1rem 2rem;
+  
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  background-color: #880D1E;
+  background-color: var(--color1);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 10px;
+  border-bottom: 5px solid var(--color0);
 }
  .navlink{
   text-decoration: none;
-  color: white;
+  color: var(--color5);
+}
+.navlink h1{
+  font-style: oblique;
+  font-size: 2rem;
 }
 .right-nav-content{
   text-align: center;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  gap: 1rem;
+  gap: 3rem;
   text-decoration: none;
+  padding: 2rem 0.5rem;
+}
+.right-nav-content .navlink i{
+  text-decoration: none;
+  color: var(--color5);
+  font-size: 20px;
 }
