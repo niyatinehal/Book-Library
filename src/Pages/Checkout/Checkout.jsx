@@ -3,16 +3,20 @@ import { productContext } from "../../context/productContext";
 import { AddressContaniner } from "../../component/AddressContaniner";
 import { useNavigate } from "react-router-dom";
 import { CheckoutPrice } from "../../component/CheckoutPrice";
+import "../Cart/cart.css"
 
 export const Checkout = () => {
   const { productData } = useContext(productContext);
   const navigate = useNavigate();
   return (
-    <div>
+    <div className="cart">
+    <div className="cart-filled">
       <h1>Checkout</h1>
+    </div>
+      
       {productData.cart.length !== 0 ? (
         <div>
-          <div>
+          <div className="cart-card-item">
             <hr />
             <h3>Select Address</h3>
             <hr />

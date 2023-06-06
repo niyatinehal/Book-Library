@@ -1,7 +1,10 @@
 footer {
   margin-top: 2rem;
-  bottom: 0;
   background-color: var(--color0);
+  left: 0;
+  bottom: 0;
+   width: 100%;
+   height: 26%;
 }
 
 footer .footer-logo-link{
@@ -10,7 +13,7 @@ color: var(--color5);
 font-style: oblique;
 }
 footer .footer-logo-link h1{
-  padding: 2rem 0rem 0rem 0rem ;
+  padding: 1rem 0rem 0rem 0rem ;
 }
 
 footer i {
@@ -20,7 +23,7 @@ footer i {
 .facilities {
   display: flex;
   justify-content: space-evenly;
-  margin: 2rem 0;
+
   text-align: center;
   flex-wrap: wrap;
 }
@@ -45,12 +48,12 @@ footer i {
 .social-links {
   display: flex;
   justify-content: center;
-  gap: 3rem;
+  gap: 2rem;
   width: 50px;
 }
-.social-links i{
+/* .social-links i{
   width: 2rem;
-}
+} */
 
 .copyright {
   background-color: var(--dark-purple);

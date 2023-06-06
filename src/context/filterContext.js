@@ -54,6 +54,7 @@ export const FilterProvider = ({ children }) => {
     prodDetails: productData.filterProduct,
     searchQuery: "",
     sortby: null,
+    category:[],
     isFiction: false,
     isFantasy: false,
     isMystery: false,

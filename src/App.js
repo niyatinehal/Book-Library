@@ -22,7 +22,7 @@ import { ProductDetail } from "./Pages/ProductDetail/ProductDetail";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Checkout } from "./Pages/Checkout/Checkout";
-import { Footer } from "./component/Footer";
+import { Footer } from "./Pages/Footer/Footer";
 
 function App() {
   const { authState } = useContext(authContext);
@@ -92,7 +92,9 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/product/:_id" element={<ProductDetail />} />
       </Routes>
-      <ToastContainer />
+      <ToastContainer 
+        position="bottom-left"
+      />
       <Footer />
     </div>
   );

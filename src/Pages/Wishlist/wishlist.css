@@ -1,0 +1,32 @@
+
+.wishlist .wishlist-empty p{
+    font-size: 2rem;
+    font-style: oblique;
+    color: var(--color1);
+    padding-top: 2rem;
+}
+.wishlist .wishlist-empty button{
+    background-color: var(--color1);
+    border-radius: 20px;
+    color: var(--color6);
+    padding: 0.5rem;
+}
+
+.wishlist .wishlist-card-item{
+    margin: 1.5rem;
+}
+.wishlist-card hr{
+    border: 2px solid var(--color0);
+}
+
+.wishlist .wishlist-card-item h3,p{
+    font-style: oblique;
+}
+.wishlist-btn{
+     padding: 0.5rem;
+  border-radius: 30px;
+  background-color: var(--color1);
+  color: var(--color6);
+  font-style: oblique;
+  font-weight: 600;
+}

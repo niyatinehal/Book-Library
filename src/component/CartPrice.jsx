@@ -3,6 +3,7 @@ import { productContext } from "../context/productContext";
 import { OrderContext } from "../context/orderContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import "../Pages/Cart/cart.css"
 
 export const CartPrice = () => {
   const { productData } = useContext(productContext);
@@ -15,7 +16,6 @@ export const CartPrice = () => {
   const getPriceDetails = (myCart) => {
     return myCart.reduce(({ price }, curr) => {
       price += curr.price * curr.qty;
-      //  console.log({price})
       return { price };
     });
   };
@@ -34,9 +34,11 @@ export const CartPrice = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="cart">
       <hr />
-      <div>
+      <h3>Price details</h3>
+      <hr/>
+      <div className="cart-card-item">
         <div>
           <p>Price ({totalQuantity} items)</p>
           <p>₹ {priceData.price}</p>

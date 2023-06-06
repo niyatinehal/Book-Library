@@ -3,6 +3,7 @@ import { authContext } from "../../context/authContext";
 import { productContext } from "../../context/productContext";
 import { EditAddress } from "../../component/EditAddress";
 import { AddressForm } from "../../component/AddressForm";
+import "../Cart/cart.css";
 
 export const UserProfile = () => {
   const { authState, logout } = useContext(authContext);
@@ -10,8 +11,8 @@ export const UserProfile = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [isAddAddress, setIsAddAddress] = useState(false);
   const cred = {
-    email: "adarshbalika@gmail.com",
-    password: "adarshbalika",
+    email: "niyatinehal58@gmail.com",
+    password: "Niyati Nehal",
   };
   console.log("address", productData.address.length);
 
@@ -24,12 +25,17 @@ export const UserProfile = () => {
   };
 
   return (
-    <div>
-      <h1>Profile Details</h1>
-      <button onClick={userDetailsHandler}>UserProfile</button>
-      <button onClick={addressHandler}>AddressDetails</button>
+    <div className="cart">
+      <div className="cart-filled">
+        <h1>Profile Details</h1>
+      </div>
+      <div className="cart-card-item">
+        <button onClick={userDetailsHandler}>UserProfile</button>
+        <button onClick={addressHandler}>AddressDetails</button>
+      </div>
+
       {isClicked ? (
-        <div>
+        <div className="cart-card-item">
           <p>
             <strong>
               {authState.user.firstName} {authState.user.lastName}
@@ -53,31 +59,38 @@ export const UserProfile = () => {
                 </p>
                 <p>{address.pincode}</p>
                 <p>Phone number: {address.mobileNumber}</p>
-                {address.isEdit && <EditAddress editAddressId={address.id} />}
-                <button
-                  onClick={() =>
-                    productDispatch({
-                      type: "editAddress",
-                      payload: address.id,
-                    })
-                  }
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() =>
-                    productDispatch({
-                      type: "deleteAddress",
-                      payload: address.id,
-                    })
-                  }
-                >
-                  Delete
-                </button>
+                <div className="cart-card-item">
+                  {address.isEdit && <EditAddress editAddressId={address.id} />}
+                  <button
+                    onClick={() =>
+                      productDispatch({
+                        type: "editAddress",
+                        payload: address.id,
+                      })
+                    }
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() =>
+                      productDispatch({
+                        type: "deleteAddress",
+                        payload: address.id,
+                      })
+                    }
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             );
           })}
-          <button onClick={() => setIsAddAddress(true)}>Add new address</button>
+          <div className="cart-card-item">
+            <button onClick={() => setIsAddAddress(true)}>
+              Add new address
+            </button>
+          </div>
+
           {isAddAddress && <AddressForm setIsAddAddress={setIsAddAddress} />}
         </div>
       )}

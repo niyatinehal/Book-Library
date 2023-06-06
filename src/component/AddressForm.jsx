@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { productContext } from "../context/productContext";
 import { v4 as uuid } from "uuid";
+import { toast } from "react-toastify";
 
 export const AddressForm = ({ setIsAddAddress }) => {
   const { productDispatch } = useContext(productContext);
@@ -18,7 +19,7 @@ export const AddressForm = ({ setIsAddAddress }) => {
     e.preventDefault();
     productDispatch({ type: "setUserAddress", payload: addressForm });
     setIsAddAddress(false);
-    alert("added Address");
+    toast.warn("added Address");
   };
   return (
     <div>
@@ -35,7 +36,7 @@ export const AddressForm = ({ setIsAddAddress }) => {
                 userName: e.target.value,
               }))
             }
-          /> 
+          />
           <input
             placeholder="Enter house no., colony"
             type="text"
@@ -54,7 +55,7 @@ export const AddressForm = ({ setIsAddAddress }) => {
             onChange={(e) =>
               setAddressForm((addressForm) => ({
                 ...addressForm,
-               city: e.target.value,
+                city: e.target.value,
               }))
             }
           />
