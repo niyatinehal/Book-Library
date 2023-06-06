@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Header } from "../component/Header.jsx";
-import { productContext } from "../context/productContext.jsx";
-import { categories } from "../backend/db/categories.js";
-import { filterContext } from "../context/filterContext.js";
-import "../styles/home.css";
+import { Header } from "../../component/Header.jsx";
+import { productContext } from "../../context/productContext.jsx";
+import { categories } from "../../backend/db/categories.js";
+import { filterContext } from "../../context/filterContext.js";
+import "./home.css";
 
 export const Home = () => {
   const navigate = useNavigate();
@@ -48,7 +48,7 @@ export const Home = () => {
             <div class="carousel-caption d-none d-md-block">
               <div className="explore-card">
                 <Link to="/product" className="explore-text">
-                  Explore more>
+                  Explore more <i class="fa-solid fa-angle-right"></i>
                 </Link>
                 <h3>Explore variety of books at your finger tips.</h3>
                 <p>Click on explore more to know more</p>
@@ -61,6 +61,15 @@ export const Home = () => {
               className="d-block w-100  c-img"
               alt="..."
             />
+                        <div class="carousel-caption d-none d-md-block">
+              <div className="explore-card">
+                <Link to="/product" className="explore-text">
+                  Explore more <i class="fa-solid fa-angle-right"></i>
+                </Link>
+                <h3>Explore variety of books at your finger tips.</h3>
+                <p>Click on explore more to know more</p>
+              </div>
+            </div>
           </div>
           <div className="carousel-item c-item ">
             <img
@@ -68,6 +77,15 @@ export const Home = () => {
               className="d-block w-100  c-img"
               alt="..."
             />
+                        <div class="carousel-caption d-none d-md-block">
+              <div className="explore-card">
+                <Link to="/product" className="explore-text">
+                  Explore more <i class="fa-solid fa-angle-right"></i>
+                </Link>
+                <h3>Explore variety of books at your finger tips.</h3>
+                <p>Click on explore more to know more</p>
+              </div>
+            </div>
           </div>
         </div>
         <button

@@ -93,11 +93,11 @@ export const AuthProvider = ({ children }) => {
         return state;
     }
   };
-
+const oldToken=localStorage.getItem("token")
   const [authState, authDispatch] = useReducer(authReducer, {
-    isLoggedIn: false,
+    isLoggedIn: oldToken ? true : false,
     user: {},
-    token: "",
+    token: oldToken ? oldToken : "",
   });
 
 

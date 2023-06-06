@@ -58,6 +58,11 @@ export const FilterProvider = ({ children }) => {
     isFantasy: false,
     isMystery: false,
   });
+  const filterCategoryFunc=(list)=>{
+    return list.reduce((acc,prod)=>{
+      return 
+    })
+  }
 
   const searchedBooks =
     filterState.searchQuery?.length > 0
@@ -73,6 +78,7 @@ export const FilterProvider = ({ children }) => {
           : b.price - a.price
       )
     : searchedBooks;
+
   const fictionalBooks = filterState.isFiction
     ? sortedBooks.filter((book) => book.categoryName === "Fiction")
     : sortedBooks;

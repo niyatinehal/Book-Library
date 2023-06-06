@@ -8,20 +8,20 @@ import {
   useNavigate,
 } from "react-router-dom";
 
-import { Home } from "./component/Home";
-import { Product } from "./component/Product";
-import { WishList } from "./component/WishList";
-import { Cart } from "./component/Cart";
-import { UserProfile } from "./component/UserProfile";
+import { Home } from "./Pages/Home/Home";
+import { Product } from "./Pages/Product/Product";
+import { WishList } from "./Pages/Wishlist/WishList";
+import { Cart } from "./Pages/Cart/Cart";
+import { UserProfile } from "./Pages/UserProfile/UserProfile";
 import { Auth } from "./component/Auth";
 import { useContext, useState } from "react";
 import { authContext } from "./context/authContext";
-import { LoginPage } from "./component/LoginPage";
-import { Signup } from "./component/Signup";
-import { ProductDetail } from "./component/ProductDetail";
+import { LoginPage } from "./Pages/LoginPage/LoginPage";
+import { Signup } from "./Pages/Signup/Signup";
+import { ProductDetail } from "./Pages/ProductDetail/ProductDetail";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Checkout } from "./component/Checkout";
+import { Checkout } from "./Pages/Checkout/Checkout";
 import { Footer } from "./component/Footer";
 
 function App() {
@@ -30,16 +30,25 @@ function App() {
     <div className="App">
       <nav className="navbar">
         <div className="logo">
-          <NavLink to="/" className="navlink"><h1>BookShala</h1> </NavLink>
+          <NavLink to="/" className="navlink">
+            <h1>BookShala</h1>{" "}
+          </NavLink>
         </div>
         <div className="right-nav-content">
-          <NavLink to="/wishlist" className="navlink"><i class="fa-solid fa-heart" ></i></NavLink>
+          <NavLink to="/product" className="navlink">
+            <i class="fa-solid fa-bag-shopping"></i>
+          </NavLink>
+          <NavLink to="/wishlist" className="navlink">
+            <i class="fa-solid fa-heart"></i>
+          </NavLink>
 
-          <NavLink to="/cart" className="navlink"><i class="fa-solid fa-cart-shopping" 
-          ></i></NavLink>
+          <NavLink to="/cart" className="navlink">
+            <i class="fa-solid fa-cart-shopping"></i>
+          </NavLink>
 
-          <NavLink to="/userProfile" className="navlink"><i class="fa-solid fa-user" 
-          ></i></NavLink>
+          <NavLink to="/userProfile" className="navlink">
+            <i class="fa-solid fa-user"></i>
+          </NavLink>
         </div>
       </nav>
       <Routes>
@@ -84,7 +93,7 @@ function App() {
         <Route path="/product/:_id" element={<ProductDetail />} />
       </Routes>
       <ToastContainer />
-      <Footer/>
+      <Footer />
     </div>
   );
 }

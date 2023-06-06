@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { productContext } from "../context/productContext";
-import { AddressContaniner } from "./AddressContaniner";
+import { productContext } from "../../context/productContext";
+import { AddressContaniner } from "../../component/AddressContaniner";
 import { useNavigate } from "react-router-dom";
-import { CheckoutPrice } from "./CheckoutPrice";
+import { CheckoutPrice } from "../../component/CheckoutPrice";
 
 export const Checkout = () => {
   const { productData } = useContext(productContext);

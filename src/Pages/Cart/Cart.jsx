@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { productContext } from "../context/productContext";
+import { productContext } from "../../context/productContext";
 import { useNavigate } from "react-router-dom";
 
-import {CartPrice, cartPrice} from "./CartPrice"
+import {CartPrice, cartPrice} from "../../component/CartPrice"
 
 
 export const Cart = ({ product }) => {

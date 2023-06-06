@@ -35,10 +35,6 @@ export const CartPrice = () => {
 
   return (
     <div>
-      <div>
-        {/* <p>Hava a Coupon?</p>
-        <button onClick={() => setCouponModal(true)}>Apply</button> */}
-      </div>
       <hr />
       <div>
         <div>

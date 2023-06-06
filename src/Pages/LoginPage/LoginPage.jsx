@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useReducer, useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
-import { authContext } from "../context/authContext";
-import { users } from "../backend/db/users";
+import { authContext } from "../../context/authContext";
+import { users } from "../../backend/db/users";
 import { toast,ToastContainer } from "react-toastify";
 
 export const LoginPage = () => {

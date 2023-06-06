@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { productContext } from "../context/productContext";
+import { productContext } from "../../context/productContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 

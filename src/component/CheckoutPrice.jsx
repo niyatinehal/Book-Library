@@ -13,6 +13,8 @@ export const CheckoutPrice = () => {
     const{orderDispatch}=useContext(OrderContext);
     const{authState}=useContext(authContext);
     const navigate=useNavigate();
+
+    
     // const loadScript=async(url)=>{
     //     return new Promise((resolve)=>{
     //         const script=document.createElement("script");

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { productContext } from "../context/productContext";
+import { productContext } from "../../context/productContext";
 import { useNavigate, useParams } from "react-router-dom";
 
 export const ProductDetail = () => {

@@ -35,7 +35,7 @@ export const AddressForm = ({ setIsAddAddress }) => {
                 userName: e.target.value,
               }))
             }
-          />
+          /> 
           <input
             placeholder="Enter house no., colony"
             type="text"

@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useContext } from "react";
-import { authContext } from "../context/authContext";
+import { authContext } from "../../context/authContext";
 
 export const Signup = () => {
   const navigate = useNavigate();

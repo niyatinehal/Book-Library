@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
-import { authContext } from "../context/authContext";
-import { productContext } from "../context/productContext";
-import { EditAddress } from "./EditAddress";
-import { AddressForm } from "./AddressForm";
+import { authContext } from "../../context/authContext";
+import { productContext } from "../../context/productContext";
+import { EditAddress } from "../../component/EditAddress";
+import { AddressForm } from "../../component/AddressForm";
 
 export const UserProfile = () => {
   const { authState, logout } = useContext(authContext);
