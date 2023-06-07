@@ -41,10 +41,29 @@ export const FilterProvider = ({ children }) => {
           prodDetails: productData.filterProduct,
           searchQuery: "",
           sortby: null,
+          category: [],
           isFiction: false,
           isFantasy: false,
           isMystery: false,
         };
+      case "updateCategory":
+        return {
+          ...prod,
+          category: prod.category.includes(action.payload)
+            ? [...prod.category.filter((item) => item !== action.payload)]
+            : [...prod.category, action.payload],
+        };
+      case "updateCategoryHome":
+        return {
+          ...prod,
+          category: [action.payload],
+        };
+      case "priceRange":{
+        return {
+          ...prod,
+          priceRange:action.payload
+        }
+      }
       default:
         return prod;
     }
@@ -54,16 +73,14 @@ export const FilterProvider = ({ children }) => {
     prodDetails: productData.filterProduct,
     searchQuery: "",
     sortby: null,
-    category:[],
-    isFiction: false,
-    isFantasy: false,
-    isMystery: false,
+    category: [],
+    priceRange:2000,
   });
-  const filterCategoryFunc=(list)=>{
-    return list.reduce((acc,prod)=>{
-      return 
-    })
-  }
+  const filterCategoryFunc = (list) => {
+    return list.reduce((acc, prod) => {
+      return;
+    });
+  };
 
   const searchedBooks =
     filterState.searchQuery?.length > 0
@@ -80,21 +97,23 @@ export const FilterProvider = ({ children }) => {
       )
     : searchedBooks;
 
-  const fictionalBooks = filterState.isFiction
-    ? sortedBooks.filter((book) => book.categoryName === "Fiction")
-    : sortedBooks;
-
-  const fantasyBooks = filterState.isFantasy
-    ? fictionalBooks.filter((book) => book.categoryName === "Fantasy")
-    : fictionalBooks;
-
-  const mysteryBooks = filterState.isMystery
-    ? fantasyBooks.filter((book) => book.categoryName === "Mystery")
-    : fantasyBooks;
+  const categoryfilteredbooks =
+    filterState?.category?.length > 0
+      ? sortedBooks.filter(({ categoryName }) =>
+          filterState?.category?.includes(categoryName)
+        )
+      : sortedBooks;
+    
+    const sliderPriceBooks=filterState.priceRange?categoryfilteredbooks.filter((book)=>book.price<=filterState.priceRange) : categoryfilteredbooks
 
   return (
     <filterContext.Provider
-      value={{ filterState, filterDispatch, mysteryBooks }}
+      value={{
+        filterState,
+        filterDispatch,
+        categoryfilteredbooks,
+        sliderPriceBooks
+      }}
     >
       {children}
     </filterContext.Provider>

@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import "./product.css";
 
 export const Product = () => {
-  const { filterState, filterDispatch, mysteryBooks } =
+  const { filterState, filterDispatch, mysteryBooks, categoryfilteredbooks,sliderPriceBooks } =
     useContext(filterContext);
   const { authState } = useContext(authContext);
   const {
@@ -43,6 +43,12 @@ export const Product = () => {
     filterDispatch({ type: "clearFilter" });
   };
 
+  const priceRangeHandler = (e) => {
+    const givenPrice = e.target.value;
+    console.log("price",givenPrice)
+    filterDispatch({ type: "priceRange", payload: Number(givenPrice) });
+  };
+
   const isItemInCart = (data, id) => {
     return data.find((item) => item._id === id) ? true : false;
   };
@@ -52,6 +58,7 @@ export const Product = () => {
 
   return (
     <div className="products">
+      {console.log("filter", sliderPriceBooks, filterState.priceRange)}
       <div className="product-filters">
         <h3>Filters</h3>
         <div className="products-search">
@@ -64,6 +71,20 @@ export const Product = () => {
             value={filterState.searchQuery}
             onChange={searchHandler}
           />
+        </div>
+        <div>
+           <input
+            type="range"
+            id="price-range"
+            min="0"
+            max="2000"
+            onChange={priceRangeHandler}
+            value={filterState.priceRange}
+          />
+           <div className="slider">
+            <p>0</p>
+            <p>2000</p>
+          </div>
         </div>
 
         <div className="product-sort">
@@ -96,8 +117,10 @@ export const Product = () => {
             <input
               type="checkbox"
               id="fiction"
-              checked={filterState.isFiction}
-              onChange={fictionHandler}
+              checked={filterState.category.includes("Fiction") ? true : false}
+              onChange={() =>
+                filterDispatch({ type: "updateCategory", payload: "Fiction" })
+              }
             />
             <lable htmlFor="fiction">Fiction</lable>
           </div>
@@ -106,8 +129,10 @@ export const Product = () => {
             <input
               type="checkbox"
               id="fantasy"
-              checked={filterState.isFantasy}
-              onChange={fantasyHandler}
+              checked={filterState.category.includes("Fantasy") ? true : false}
+              onChange={() =>
+                filterDispatch({ type: "updateCategory", payload: "Fantasy" })
+              }
             />
             <lable htmlFor="fantasy">Fantasy</lable>
           </div>
@@ -116,8 +141,10 @@ export const Product = () => {
             <input
               type="checkbox"
               id="mystery"
-              checked={filterState.isMystery}
-              onChange={mysteryHandler}
+              checked={filterState.category.includes("Mystery") ? true : false}
+              onChange={() =>
+                filterDispatch({ type: "updateCategory", payload: "Mystery" })
+              }
             />
             <lable htmlFor="mystery">Mystery</lable>
           </div>
@@ -129,10 +156,10 @@ export const Product = () => {
         </div>
       </div>
 
-      {mysteryBooks ? (
+      {sliderPriceBooks ? (
         <div className="product-list">
-          {mysteryBooks?.length > 0 ? (
-            mysteryBooks.map((book) => (
+          {sliderPriceBooks?.length > 0 ? (
+            sliderPriceBooks.map((book) => (
               <div className="books">
                 <li key={book._id}>
                   <Link to={`/product/${book._id}`}>
@@ -140,6 +167,7 @@ export const Product = () => {
                   </Link>
 
                   <h3>{book.title}</h3>
+                  <strong>₹{book.price}</strong>
 
                   <div className="cart-wishlist-btn">
                     <button
@@ -182,7 +210,7 @@ export const Product = () => {
             ))
           ) : (
             <div className="alert">
-              <p>oops! A book Can have only one genere</p>
+              <p>No books under this price range</p>
             </div>
           )}
         </div>

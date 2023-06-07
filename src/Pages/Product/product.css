@@ -3,6 +3,7 @@
   flex-direction: row;
   justify-content: flex-start;
 }
+.slider
 .products .product-filters {
   border-right: 2px solid;
   padding-top: 1rem;
